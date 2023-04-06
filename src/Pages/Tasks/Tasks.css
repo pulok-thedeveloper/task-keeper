@@ -1,0 +1,12 @@
+.add-btn{
+    background-color: rgba(250, 210, 7, 0.8);
+    box-shadow: 0 1px 1px 5px rgba(250, 210, 7, 0.2);
+}
+
+.add-btn:hover{
+    background-color: rgba(226, 191, 12, 1);
+}
+
+.tasks-wrapper{
+    height: calc(100vh - 80px);
+}

@@ -1,5 +1,9 @@
 .App {
-  text-align: center;
+  
+}
+
+.notes-container, .no-task{
+  height: calc(100vh - 80px);
 }
 
 .App-logo {
