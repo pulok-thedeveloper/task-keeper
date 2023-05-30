@@ -9,18 +9,17 @@ import logo from "../../Assests/to-do-list.png";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import moment from "moment";
-import { toast } from "react-hot-toast";
 import Notification from "./Notification/Notification";
 
 const Navbar = ({ handleDrawer }) => {
   const { googleSignIn, logOut, user } = useContext(AuthContext);
   const googleAuthProvider = new GoogleAuthProvider();
-  const [dueTasks, setDueTasks] = useState([]);
+  const [dueTasks, setDueTasks] = useState();
   let currentdate = moment().format().slice(0, 16);
   const [notificationBox, setNotificationBox] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/tasks?email=${user?.email}`)
+    fetch(`https://task-keeper-five.vercel.app/tasks?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setDueTasks(data.data.filter((task) => task.date <= currentdate  && !task.finish));
@@ -46,19 +45,19 @@ const Navbar = ({ handleDrawer }) => {
 
   return (
     <div className="nav-bar w-full h-16 flex justify-between items-center px-8">
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3 md:gap-5">
         <span
           onClick={handleDrawer}
           className="icon-hover cursor-pointer p-3 rounded-full"
         >
           <HiBars3 className="text-2xl rounded-full" />
         </span>
-        <div className="flex items-center gap-3 select-none">
-          <img alt="" src={logo} />
-          <h1 className="text-2xl logo-title">Task Keeper</h1>
+        <div className="flex items-center gap-1 md:gap-3 select-none">
+          <img className="" alt="" src={logo} />
+          <h1 className="text-xl md:text-2xl logo-title">Task Keeper</h1>
         </div>
       </div>
-      <div className="flex items-center search-bar rounded-md">
+      <div className="md:flex items-center hidden search-bar rounded-md">
         <span className="pl-3">
           <HiOutlineSearch className="search-icon" />
         </span>
@@ -74,7 +73,7 @@ const Navbar = ({ handleDrawer }) => {
             <div
               onClick={() => setNotificationBox(!notificationBox)}
               className={`icon-hover cursor-pointer p-3 rounded-full ${
-                dueTasks.length && "indicator"
+                dueTasks?.length && "indicator"
               }`}
             >
             {
@@ -86,7 +85,7 @@ const Navbar = ({ handleDrawer }) => {
 
             </div>
             {notificationBox && (
-              <div className="notification-box shadow-md w-80 p-5 bg-slate-100 h-96 select-none">
+              <div className="notification-box shadow-md w-80 z-20 p-5 bg-slate-100 h-96 select-none">
                 <h2 className="text-lg font-semibold ">Notifications</h2>
                 {dueTasks?.length === 0 ? (
                   <p className="mt-3">No Due Tasks.</p>
@@ -110,7 +109,7 @@ const Navbar = ({ handleDrawer }) => {
             onClick={handleGoogleSignIn}
             className="flex items-center gap-3 cursor-pointer px-5 py-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-all"
           >
-            <FcGoogle className="text-xl" /> Sign in with Google
+            <FcGoogle className="text-xl" /> Sign in
           </button>
         )}
       </div>

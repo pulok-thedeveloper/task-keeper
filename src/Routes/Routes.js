@@ -16,7 +16,7 @@ export const routes = createBrowserRouter([
                 element: <Tasks></Tasks>
             },
             {
-                path: '/remainders',
+                path: '/completed',
                 element: <PrivateRoute><Completed></Completed></PrivateRoute>
             },
             {

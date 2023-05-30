@@ -18,7 +18,7 @@ const EditTask = ({closeModal, task}) => {
         e.preventDefault();
         console.log(newTask)
 
-        fetch(`http://localhost:5000/task/${task?._id}`,
+        fetch(`https://task-keeper-five.vercel.app/task/${task?._id}`,
         {
             method: 'PUT',
             headers: {
@@ -40,11 +40,11 @@ const EditTask = ({closeModal, task}) => {
     <div>
       <div
         onClick={closeModal}
-        className="modal-wrapper fixed left-0 top-0 right-0 bottom-0"
+        className="modal-wrapper z-20 fixed left-0 top-0 right-0 bottom-0"
       ></div>
       <form
         onSubmit={handleSaveTask}
-        className="modal-container max-h-2/3 z-10 bg-white flex flex-col gap-3 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 rounded-lg"
+        className="modal-container max-h-2/3 z-20 bg-white flex flex-col gap-3 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 rounded-lg"
       >
         <input
           type="text"

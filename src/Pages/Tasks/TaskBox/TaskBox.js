@@ -16,7 +16,7 @@ const TaskBox = ({ task }) => {
   const closeEditModal = () => setEditTask(false);
 
   const handleArchive = () => {
-    fetch(`http://localhost:5000/archive/${task?._id}`, {
+    fetch(`https://task-keeper-five.vercel.app/archive/${task?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -33,7 +33,7 @@ const TaskBox = ({ task }) => {
   };
 
   const handleUnArchive = () => {
-    fetch(`http://localhost:5000/unarchive/${task?._id}`, {
+    fetch(`https://task-keeper-five.vercel.app/unarchive/${task?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -50,7 +50,7 @@ const TaskBox = ({ task }) => {
   };
 
   const handleTrash = () => {
-    fetch(`http://localhost:5000/trash/${task?._id}`, {
+    fetch(`https://task-keeper-five.vercel.app/trash/${task?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -67,7 +67,7 @@ const TaskBox = ({ task }) => {
   };
 
   const handleRestore = () => {
-    fetch(`http://localhost:5000/restore/${task?._id}`, {
+    fetch(`https://task-keeper-five.vercel.app/restore/${task?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -86,7 +86,7 @@ const TaskBox = ({ task }) => {
   const handleDelete = (id) => {
     const proceed = window.confirm("Are you want to delete this task permantly?");
     if (proceed) {
-      fetch(`http://localhost:5000/task/${task?._id}`, { method: "DELETE" })
+      fetch(`https://task-keeper-five.vercel.app/task/${task?._id}`, { method: "DELETE" })
         .then((res) => res.json())
         .then((data) => {
           console.log(data.data);

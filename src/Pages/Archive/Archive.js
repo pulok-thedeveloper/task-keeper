@@ -4,18 +4,35 @@ import TaskModal from "../Tasks/TaskModal/TaskModal";
 import TaskBox from "../Tasks/TaskBox/TaskBox";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiArchiveIn } from "react-icons/bi";
+import { InfinitySpin } from "react-loader-spinner";
 
 const Archive = () => {
   const [tasks, setTasks] = useState();
   const [addTaskModal, setAddTaskModal] = useState(false);
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
-    fetch(`http://localhost:5000/tasks?email=${user?.email}`)
+    if(!tasks){
+      setLoading(true)
+    }
+    else{
+      setLoading(false)
+    }
+    fetch(`https://task-keeper-five.vercel.app/tasks?email=${user?.email}`)
       .then((res) => res.json())
-      .then((data) => setTasks(data.data))
+      .then((data) => setTasks(data.data.filter((task) => task?.archive && !task?.trash)))
       .catch((err) => console.log(err.message));
   }, [user?.email, tasks]);
+
+  if (loading) {
+    return (
+      <div className="w-full h-screen grid place-items-center">
+        <InfinitySpin width="200" color="#FAD207" />
+      </div>
+    );
+  }
 
   const closeModal = () => setAddTaskModal(false);
 
@@ -29,11 +46,10 @@ const Archive = () => {
           </div>
         </div>
       ) : (
-        <div className="tasks-wrapper w-full p-5">
-          <div className="grid grid-cols-4 gap-5">
+        <div className="tasks-wrapper md:m-0 ml-20 w-full p-5">
+          <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
             {tasks
-              ?.filter((task) => task?.archive && !task?.trash)
-              .map((filteredTask) => (
+              ?.map((filteredTask) => (
                 <TaskBox key={filteredTask._id} task={filteredTask}></TaskBox>
               ))}
           </div>

@@ -8,7 +8,7 @@ const Notification = ({ task }) => {
   const closeEditModal = () => setEditTask(false);
 
   const handleFinish = () => {
-    fetch(`http://localhost:5000/finish/${task?._id}`, {
+    fetch(`https://task-keeper-five.vercel.app/finish/${task?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

@@ -21,7 +21,7 @@ const TaskModal = ({ closeModal }) => {
         date
     }
 
-    fetch("http://localhost:5000/tasks", {
+    fetch("https://task-keeper-five.vercel.app/tasks", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -40,11 +40,11 @@ const TaskModal = ({ closeModal }) => {
     <div>
       <div
         onClick={closeModal}
-        className="modal-wrapper fixed left-0 top-0 right-0 bottom-0"
+        className="modal-wrapper z-20 fixed left-0 top-0 right-0 bottom-0"
       ></div>
       <form
         onSubmit={handleSaveTask}
-        className="modal-container bg-white flex flex-col gap-3 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 rounded-lg"
+        className="modal-container z-20 bg-white flex flex-col gap-3 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 rounded-lg"
       >
         <input
           type="text"
